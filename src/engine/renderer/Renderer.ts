@@ -112,12 +112,16 @@ export class Renderer {
   // Textures
   private textures = new Map<string, WebGLTexture>();
   private fallbackTexture: WebGLTexture;
-  private currentTextureId: string | null = null;
+  
 
   // Background color
   clearColor: [number, number, number, number] = [0.039, 0.055, 0.090, 1]; // #0a0e17
 
-  constructor(private canvas: HTMLCanvasElement) {
+  private canvas: HTMLCanvasElement;
+
+constructor(canvas: HTMLCanvasElement) {
+  this.canvas = canvas;
+
     const gl = canvas.getContext('webgl2', {
       alpha: false,
       antialias: false,
@@ -245,7 +249,7 @@ export class Renderer {
     gl.clearColor(r, g, b, a);
     gl.clear(gl.COLOR_BUFFER_BIT);
     this.spriteCount = 0;
-    this.currentTextureId = null;
+    
   }
 
   /** Push a sprite into the batch */
